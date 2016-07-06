@@ -3,6 +3,9 @@
   <div v-if="!isLoading">
     <input type="text" v-model="inputAppName"></input>
     <button v-on:click="createApp">Create app</button>
+    <div v-if="error">
+      <b>error:</b> <i>{{error}}</i>
+    </div>
   </div>
   <div class="dokku-apps">
       <dokku-app v-for="app in apps" :name="app"></dokku-app>
@@ -20,6 +23,7 @@ export default {
       apps: [],
       inputAppName: '',
       isLoading: true,
+      error: null,
     };
   },
   ready() {
@@ -33,11 +37,12 @@ export default {
       })
         .then(() => {
           this.loadApps();
+          this.error = null;
           this.inputAppName = '';
           this.isLoading = false;
         })
-        .catch(err => {
-          console.log(err);
+        .catch(({ data }) => {
+          this.error = data.stderr;
           this.isLoading = false;
         });
     },
