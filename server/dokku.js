@@ -1,12 +1,14 @@
-const ssh = require('promised-ssh');
+const SSH = require('node-ssh');
 const Bluebird = require('bluebird');
 
 const config = require('../config/dokku');
 
+let connection;
+
 function getApps() {
   return getConn()
-    .then(conn => conn.exec(['apps']))
-    .then(getStdout)
+    .then(conn => conn.execCommand('apps'))
+    .then(processOutput)
     .then(parseTable);
 }
 
@@ -20,26 +22,26 @@ function getApp(appName) {
 
 function createApp(appName) {
   return getConn()
-    .then(conn => conn.exec([`apps:create ${appName}`]));
+    .then(conn => conn.execCommand(`apps:create ${appName}`));
 }
 
 function deleteApp(appName) {
   return getConn()
-    .then(conn => conn.exec([`apps:destroy ${appName} --force`]));
+    .then(conn => conn.execCommand(`apps:destroy ${appName} --force`));
 }
 
 function getConfig(appName) {
   return getConn()
-    .then(conn => conn.exec([`config ${appName}`]))
-    .then(getStdout)
+    .then(conn => conn.execCommand(`config ${appName}`))
+    .then(processOutput)
     .then(parseTable)
     .then(parseConfig);
 }
 
 function getUrl(appName) {
   return getConn()
-    .then(conn => conn.exec([`url ${appName}`]))
-    .then(getStdout);
+    .then(conn => conn.execCommand(`url ${appName}`))
+    .then(processOutput);
 }
 
 function parseTable(table) {
@@ -54,13 +56,20 @@ function parseConfig(config) {
   }, {});
 }
 
-function getStdout([stdout, stderr]) {
+function processOutput({ stdout, stderr, code, signal }) {
+  console.log({ stdout, stderr, code, signal });
+  if (stderr) {
+    throw new Error(stderr);
+  }
   return stdout || '';
 }
 
 function getConn() {
-  return ssh
-    .connect(config);
+  if (!connection) {
+    console.log('Creating a new ssh connection...');
+    connection = new SSH().connect(config);
+  }
+  return connection;
 }
 
 module.exports = {
