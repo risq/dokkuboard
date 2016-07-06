@@ -8,13 +8,6 @@ api.get('/apps', (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
-api.get('/apps/:name', (req, res) => {
-  dokku.getApp(req.params.name)
-    .then(apps => res.json(apps))
-    // .catch(err => console.log('err:', err));
-    .catch(err => res.status(500).json(err));
-});
-
 api.post('/apps', (req, res) => {
   dokku.createApp(req.body.name)
   .then(apps => res.json(apps))
@@ -23,6 +16,18 @@ api.post('/apps', (req, res) => {
 
 api.delete('/apps/:name', (req, res) => {
   dokku.deleteApp(req.params.name)
+    .then(apps => res.json(apps))
+    .catch(err => res.status(500).json(err));
+});
+
+api.get('/apps/:name/urls', (req, res) => {
+  dokku.getUrl(req.params.name)
+    .then(apps => res.json(apps))
+    .catch(err => res.status(500).json(err));
+});
+
+api.get('/apps/:name/config', (req, res) => {
+  dokku.getConfig(req.params.name)
     .then(apps => res.json(apps))
     .catch(err => res.status(500).json(err));
 });

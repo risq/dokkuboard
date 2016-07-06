@@ -9,22 +9,9 @@
     <div class="card-block">
       <pulse-loader :color="'#373a3c'" v-if="isLoading"></pulse-loader>
       <div v-if="!isLoading">
-        <h4>url:</h4>
-        <a href="{{url}}" v-if="url">{{url}}</a>
-        <i v-if="!url">no url found for app {{name}}</i>
+        <urls :name="name"></urls>
         <hr>
-        <h4>config:</h4>
-        <div v-if="config">
-          <table class="table table-bordered table-sm">
-            <tr v-for="(key, value) in config">
-              <th>{{key}}</th>
-              <td>{{value}}</td>
-            </tr>
-          </table>
-        </div>
-        <div v-if="!config">
-          <i>no config found for app {{name}}</i>
-        </div>
+        <config :name="name"></config>
         <hr>
         <button class="btn btn-default" v-on:click="deleteApp">Delete</button>
       </div>
@@ -35,6 +22,8 @@
 <script>
 import axios from 'axios';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+import Urls from './plugins/Urls';
+import Config from './plugins/Config';
 
 export default {
   data() {
@@ -85,6 +74,8 @@ export default {
   },
   components: {
     PulseLoader,
+    Urls,
+    Config,
   },
 };
 </script>

@@ -12,14 +12,6 @@ function getApps() {
     .then(parseTable);
 }
 
-function getApp(appName) {
-  return Bluebird.props({
-    name: appName,
-    url: getUrl(appName),
-    config: getConfig(appName),
-  });
-}
-
 function createApp(appName) {
   return getConn()
     .then(conn => conn.execCommand(`apps:create ${appName}`))
@@ -76,7 +68,8 @@ function getConn() {
 
 module.exports = {
   getApps,
-  getApp,
   createApp,
   deleteApp,
+  getUrl,
+  getConfig,
 };
