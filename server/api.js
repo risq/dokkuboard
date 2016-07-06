@@ -11,6 +11,7 @@ api.get('/apps', (req, res) => {
 api.get('/apps/:name', (req, res) => {
   dokku.getApp(req.params.name)
     .then(apps => res.json(apps))
+    // .catch(err => console.log('err:', err));
     .catch(err => res.status(500).json(err));
 });
 

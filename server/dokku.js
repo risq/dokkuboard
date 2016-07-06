@@ -22,12 +22,14 @@ function getApp(appName) {
 
 function createApp(appName) {
   return getConn()
-    .then(conn => conn.execCommand(`apps:create ${appName}`));
+    .then(conn => conn.execCommand(`apps:create ${appName}`))
+    .then(processOutput);
 }
 
 function deleteApp(appName) {
   return getConn()
-    .then(conn => conn.execCommand(`apps:destroy ${appName} --force`));
+    .then(conn => conn.execCommand(`apps:destroy ${appName} --force`))
+    .then(processOutput);
 }
 
 function getConfig(appName) {
@@ -58,8 +60,8 @@ function parseConfig(config) {
 
 function processOutput({ stdout, stderr, code, signal }) {
   console.log({ stdout, stderr, code, signal });
-  if (stderr) {
-    throw new Error(stderr);
+  if (stderr || code !== 0) {
+    return Bluebird.reject({ stdout, stderr, code, signal });
   }
   return stdout || '';
 }
