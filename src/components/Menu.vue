@@ -20,7 +20,6 @@
 <script>
 import axios from 'axios';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
-import DokkuApp from './DokkuApp';
 
 export default {
   data() {
@@ -50,7 +49,6 @@ export default {
     },
   },
   components: {
-    DokkuApp,
     PulseLoader,
   },
 };

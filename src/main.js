@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import App from './App';
-import DokkuAppsList from './components/DokkuAppsList';
-import DokkuAppDetails from './components/DokkuAppDetails';
 import VueRouter from 'vue-router';
+import App from './App';
+import AppsList from './components/AppsList';
+import AppDetails from './components/AppDetails';
 
 Vue.use(VueRouter);
 
@@ -10,10 +10,10 @@ const router = new VueRouter({
   history: true,
 }).map({
   '/apps/:name': {
-    component: DokkuAppDetails,
+    component: AppDetails,
   },
   '*': {
-    component: DokkuAppsList,
+    component: AppsList,
   },
 });
 

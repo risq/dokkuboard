@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="dokku-apps-list__container">
-        <dokku-app v-for="app in apps" :name="app"></dokku-app>
+        <app-card v-for="app in apps" :name="app"></app-card>
     </div>
   </div>
 </template>
@@ -23,7 +23,7 @@
 <script>
 import axios from 'axios';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
-import DokkuApp from './DokkuApp';
+import AppCard from './AppCard';
 
 export default {
   data() {
@@ -71,7 +71,7 @@ export default {
     },
   },
   components: {
-    DokkuApp,
+    AppCard,
     PulseLoader,
   },
 };

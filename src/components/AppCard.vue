@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="app-card card">
     <div class="card-header">
       <h3 class="card-title dokku-app__title">
         {{name}}
