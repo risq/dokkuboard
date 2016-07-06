@@ -8,8 +8,8 @@
       <li class="menu__item">
         <span class="nav-link">app details:</span>
         <ul>
-          <li class="menu__item" v-for="app in apps">
-            <a class="nav-link" v-link="{ path: `/apps/${app}` }">> {{app}}</a>
+          <li class="menu__item" v-for="name in apps">
+            <a class="nav-link" v-link="{ path: `/apps/${name}` }">> {{name}}</a>
           </li>
         </ul>
       </li>

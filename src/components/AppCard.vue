@@ -2,7 +2,7 @@
   <div class="app-card card">
     <div class="card-header">
       <h3 class="card-title dokku-app__title">
-        {{name}}
+          <a class="nav-link" v-link="{ path: `/apps/${name}` }">{{name}}</a>
       </h3>
     </div>
 
@@ -30,25 +30,13 @@ export default {
     return {
       url: '',
       config: null,
-      isLoading: true,
+      isLoading: false,
     };
   },
   props: [
     'name',
   ],
   methods: {
-    getApp() {
-      axios.get(`/api/apps/${this.name}`)
-        .then(({ data }) => {
-          this.name = data.name;
-          this.url = data.url;
-          this.config = data.config;
-          this.isLoading = false;
-        })
-        .catch(() => {
-          this.isLoading = false;
-        });
-    },
     deleteApp() {
       this.isLoading = true;
       axios.delete(`/api/apps/${this.name}`)
@@ -62,14 +50,10 @@ export default {
         });
     },
   },
-  ready() {
-    this.getApp();
-  },
+
   route: {
     data({ to }) {
-      this.$data = this.$options.data();
       this.name = to.params.name;
-      this.getApp();
     },
   },
   components: {

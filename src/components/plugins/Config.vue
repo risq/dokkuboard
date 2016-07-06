@@ -1,7 +1,7 @@
 <template>
   <div class="config">
     <h4>config:</h4>
-    <pulse-loader :color="'#373a3c'" v-if="isLoading"></pulse-loader>
+    <pulse-loader class="spinner" :color="'#373a3c'" v-if="isLoading"></pulse-loader>
     <div class="data" v-if="!isLoading">
       <div v-if="config">
         <table class="table table-bordered table-sm">
@@ -65,4 +65,8 @@ export default {
   table
     font-family: monospace
     font-size: 0.9rem
+
+  .spinner
+    margin: 32px 0
+    text-align: center
 </style>

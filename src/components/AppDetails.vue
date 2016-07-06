@@ -43,7 +43,6 @@ export default {
 
   route: {
     data({ to }) {
-      this.$data = this.$options.data();
       this.name = to.params.name;
     },
   },

@@ -1,7 +1,7 @@
 <template>
   <div class="urls">
     <h4>url:</h4>
-    <pulse-loader :color="'#373a3c'" v-if="isLoading"></pulse-loader>
+    <pulse-loader class="spinner" :color="'#373a3c'" v-if="isLoading"></pulse-loader>
     <div class="data" v-if="!isLoading">
       <a href="{{url}}" v-if="url">{{url}}</a>
       <i v-if="!url">no url found for app {{name}}</i>
@@ -53,5 +53,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
-
+  .spinner
+    margin: 32px 0
+    text-align: center
 </style>
