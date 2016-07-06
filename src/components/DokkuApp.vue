@@ -1,17 +1,21 @@
 <template>
-  <div class="dokku-app">
-    <h2>
-      app: <i>{{name}}</i>
-    </h2>
-    <pulse-loader v-if="isLoading"></pulse-loader>
-    <div v-if="!isLoading">
-      <div class="dokku-app_info">
-        <h3>url:</h3>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title dokku-app__title">
+        {{name}}
+      </h3>
+    </div>
+
+    <div class="card-block">
+      <pulse-loader v-if="isLoading"></pulse-loader>
+      <div v-if="!isLoading">
+        <h4>url:</h4>
         <a href="{{url}}" v-if="url">{{url}}</a>
         <i v-if="!url">no url found for app {{name}}</i>
-        <h3>config:</h3>
+        <hr>
+        <h4>config:</h4>
         <div v-if="config">
-          <table>
+          <table class="table table-bordered table-sm">
             <tr v-for="(key, value) in config">
               <th>{{key}}</th>
               <td>{{value}}</td>
@@ -21,11 +25,11 @@
         <div v-if="!config">
           <i>no config found for app {{name}}</i>
         </div>
+        <hr>
+        <button class="btn btn-default" v-on:click="deleteApp">Delete</button>
       </div>
-      <button v-on:click="deleteApp">Delete</button>
     </div>
   </div>
-  <hr>
 </template>
 
 <script>
@@ -78,26 +82,11 @@ export default {
 };
 </script>
 
-<style scoped>
-th {
-  text-align: left;
-}
+<style scoped lang="sass">
+table
+  font-family: monospace
 
-h3 {
-  margin-bottom: 6px;
-}
-
-table {
-  font-family: monospace;
-}
-
-hr {
-  border-bottom: 1px solid #ddd;
-  border-top: none;
-  margin: 32px 16px;
-}
-
-.dokku-app_info {
-  margin-bottom: 24px;
-}
+.dokku-app
+  &__title
+    margin-bottom: 0
 </style>

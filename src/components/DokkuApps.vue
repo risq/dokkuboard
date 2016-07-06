@@ -1,14 +1,21 @@
 <template>
-  <pulse-loader v-if="isLoading"></pulse-loader>
-  <div v-if="!isLoading">
-    <input type="text" v-model="inputAppName"></input>
-    <button v-on:click="createApp">Create app</button>
-    <div v-if="error">
-      <b>error:</b> <i>{{error}}</i>
-    </div>
-  </div>
   <div class="dokku-apps">
-      <dokku-app v-for="app in apps" :name="app"></dokku-app>
+    <h1>dokku apps</h1>
+    <pulse-loader v-if="isLoading"></pulse-loader>
+    <div v-if="!isLoading">
+      <div class="form-inline">
+        <!-- <div class="form-group"> -->
+          <input type="text" class="form-control" v-model="inputAppName"></input>
+          <button class="btn btn-default" v-on:click="createApp">Create app</button>
+        <!-- </div> -->
+      </div>
+      <div v-if="error">
+        <b>error:</b> <i>{{error}}</i>
+      </div>
+    </div>
+    <div class="dokku-apps__container">
+        <dokku-app v-for="app in apps" :name="app"></dokku-app>
+    </div>
   </div>
 </template>
 
@@ -69,8 +76,10 @@ export default {
 };
 </script>
 
-<style scoped>
-h1 {
-  color: #42b983;
-}
+<style scoped lang="sass">
+.dokku-apps
+  margin-top: 128px
+
+  &__container
+    margin-top: 48px
 </style>

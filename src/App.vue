@@ -1,7 +1,14 @@
 <template>
   <div id="app">
-    <h1>dokku apps</h1>
-    <dokku-apps></dokku-apps>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-9">
+          <dokku-apps></dokku-apps>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,27 +22,15 @@ export default {
 };
 </script>
 
-<style>
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 64px 0;
-}
+<style lang="sass">
+@import "../node_modules/bootstrap/scss/bootstrap"
 
-#app {
-  color: #2c3e50;
-  max-width: 600px;
-  font-family: Source Sans Pro, Helvetica, sans-serif;
-}
+#app
+  color: #2c3e50
+  font-family: Source Sans Pro, Helvetica, sans-serif
 
-#app a {
-  color: #42b983;
-  text-decoration: none;
-}
+#app a
+  color: #42b983
+  text-decoration: none
 
-.logo {
-  width: 100px;
-  height: 100px
-}
 </style>
