@@ -1,29 +1,27 @@
 <template>
-  <div id="app">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-2">
-        </div>
-        <div class="col-sm-9">
-          <dokku-apps></dokku-apps>
-        </div>
+  <menu></menu>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <router-view class="view" keep-alive></router-view>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import DokkuApps from './components/DokkuApps';
+import Menu from './components/Menu';
 
 export default {
   components: {
-    DokkuApps,
+    Menu,
   },
 };
 </script>
 
 <style lang="sass">
 @import "../node_modules/bootstrap/scss/bootstrap"
+$menuWidth: 300px
 
 #app
   color: #2c3e50
@@ -32,5 +30,14 @@ export default {
 #app a
   color: #42b983
   text-decoration: none
+
+.menu
+  width: $menuWidth
+
+.menu + .container
+  margin-left: $menuWidth
+
+.view
+  margin-top: 32px
 
 </style>

@@ -1,7 +1,8 @@
 <template>
-  <div class="dokku-apps">
-    <h1>dokku apps</h1>
-    <pulse-loader v-if="isLoading"></pulse-loader>
+  <div class="dokku-apps-list">
+    <h2>All apps</h2>
+    <hr>
+    <pulse-loader :color="'#373a3c'" v-if="isLoading"></pulse-loader>
     <div v-if="!isLoading">
       <div class="form-inline">
         <!-- <div class="form-group"> -->
@@ -13,7 +14,7 @@
         <b>error:</b> <i>{{error}}</i>
       </div>
     </div>
-    <div class="dokku-apps__container">
+    <div class="dokku-apps-list__container">
         <dokku-app v-for="app in apps" :name="app"></dokku-app>
     </div>
   </div>
@@ -65,7 +66,7 @@ export default {
     },
   },
   events: {
-    onAppDelete() {
+    'app:delete'() {
       this.loadApps();
     },
   },
@@ -77,9 +78,8 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.dokku-apps
-  margin-top: 128px
+.dokku-apps-list
 
   &__container
-    margin-top: 48px
+    margin-top: 16px
 </style>

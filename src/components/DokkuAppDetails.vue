@@ -1,32 +1,30 @@
 <template>
-  <div class="card">
-    <div class="card-header">
-      <h3 class="card-title dokku-app__title">
-        {{name}}
-      </h3>
-    </div>
+  <div class="dokku-apps-details">
+    <h2>{{name}}</h2>
+    <hr>
 
-    <div class="card-block">
-      <pulse-loader :color="'#373a3c'" v-if="isLoading"></pulse-loader>
-      <div v-if="!isLoading">
-        <h4>url:</h4>
-        <a href="{{url}}" v-if="url">{{url}}</a>
-        <i v-if="!url">no url found for app {{name}}</i>
-        <hr>
-        <h4>config:</h4>
-        <div v-if="config">
-          <table class="table table-bordered table-sm">
-            <tr v-for="(key, value) in config">
-              <th>{{key}}</th>
-              <td>{{value}}</td>
-            </tr>
-          </table>
+      <div class="card-block">
+        <pulse-loader :color="'#373a3c'" v-if="isLoading"></pulse-loader>
+        <div v-if="!isLoading">
+          <h4>url:</h4>
+          <a href="{{url}}" v-if="url">{{url}}</a>
+          <i v-if="!url">no url found for app {{name}}</i>
+          <hr>
+          <h4>config:</h4>
+          <div v-if="config">
+            <table class="table table-bordered table-sm">
+              <tr v-for="(key, value) in config">
+                <th>{{key}}</th>
+                <td>{{value}}</td>
+              </tr>
+            </table>
+          </div>
+          <div v-if="!config">
+            <i>no config found for app {{name}}</i>
+          </div>
+          <hr>
+          <button class="btn btn-default" v-on:click="deleteApp">Delete</button>
         </div>
-        <div v-if="!config">
-          <i>no config found for app {{name}}</i>
-        </div>
-        <hr>
-        <button class="btn btn-default" v-on:click="deleteApp">Delete</button>
       </div>
     </div>
   </div>
@@ -64,7 +62,7 @@ export default {
       this.isLoading = true;
       axios.delete(`/api/apps/${this.name}`)
         .then(() => {
-          this.$dispatch('app:delete');
+          this.$dispatch('onAppDelete');
           this.isLoading = false;
         })
         .catch(err => {
