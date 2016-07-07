@@ -34,9 +34,6 @@ export default {
   ],
   methods: {
     getData() {
-      this.isLoading = true;
-      this.$data = this.$options.data();
-
       axios.get(`/api/apps/${this.name}/config`)
         .then(({ data }) => {
           this.config = data;
@@ -49,6 +46,8 @@ export default {
   },
   watch: {
     name() {
+      this.isLoading = true;
+      this.$data = this.$options.data();
       this.getData();
     },
   },

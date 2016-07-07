@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <router-view class="view" keep-alive></router-view>
+        <router-view class="view"></router-view>
       </div>
     </div>
   </div>
@@ -21,6 +21,7 @@ export default {
 
 <style lang="sass">
 @import "../node_modules/bootstrap/scss/bootstrap"
+@import "../node_modules/xterm/src/xterm.css"
 $menuWidth: 300px
 
 #app

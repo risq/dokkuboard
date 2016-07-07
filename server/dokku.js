@@ -73,7 +73,6 @@ function parseConfig(config) {
 }
 
 function processOutput({ stdout, stderr, code, signal }) {
-  console.log({ stdout, stderr, code, signal });
   if (stderr || code !== 0) {
     return Bluebird.reject({ stdout, stderr, code, signal });
   }

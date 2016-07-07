@@ -4,24 +4,25 @@ const webpack = require('webpack');
 const config = require('./config');
 const proxyMiddleware = require('http-proxy-middleware');
 const bodyParser = require('body-parser');
-
 const env = process.env.NODE_ENV || 'dev';
 const webpackConfig = env === 'testing'
   ? require('./build/webpack.prod.conf')
   : require('./build/webpack.dev.conf');
 
 const api = require('./server/api');
+const shell = require('./server/shell');
 
-// default port where dev server listens for incoming traffic
 const port = process.env.PORT || config.dev.port;
+
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
 const proxyTable = config.dev.proxyTable;
 
 const app = express();
 app.use(bodyParser.json());
-app.use('/api', api);
 
+shell.init(app);
+app.use('/api', api);
 
 if (env === 'dev') {
   const compiler = webpack(webpackConfig);

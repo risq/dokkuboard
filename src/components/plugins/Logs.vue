@@ -27,9 +27,6 @@ export default {
   ],
   methods: {
     getData() {
-      this.isLoading = true;
-      this.$data = this.$options.data();
-
       axios.get(`/api/apps/${this.name}/logs`)
         .then(({ data }) => {
           this.logs = ansiUp.ansi_to_html(data.replace(/(?:\r\n|\r|\n)/g, '<br />'));
@@ -42,6 +39,8 @@ export default {
   },
   watch: {
     name() {
+      this.isLoading = true;
+      this.$data = this.$options.data();
       this.getData();
     },
   },

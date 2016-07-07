@@ -25,9 +25,6 @@ export default {
   ],
   methods: {
     getData() {
-      this.isLoading = true;
-      this.$data = this.$options.data();
-
       axios.get(`/api/apps/${this.name}/urls`)
         .then(({ data }) => {
           this.url = data;
@@ -40,6 +37,8 @@ export default {
   },
   watch: {
     name() {
+      this.isLoading = true;
+      this.$data = this.$options.data();
       this.getData();
     },
   },

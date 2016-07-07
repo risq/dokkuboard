@@ -10,6 +10,8 @@
     <hr>
     <logs :name="name"></logs>
     <hr>
+    <enter :name="name"></enter>
+    <hr>
     <button class="btn btn-default" v-on:click="deleteApp">Delete</button>
   </div>
 </template>
@@ -20,6 +22,7 @@ import Urls from './plugins/Urls';
 import Config from './plugins/Config';
 import Ps from './plugins/Ps';
 import Logs from './plugins/Logs';
+import Enter from './plugins/Enter';
 
 export default {
   data() {
@@ -57,6 +60,7 @@ export default {
     Config,
     Ps,
     Logs,
+    Enter,
   },
 };
 </script>
