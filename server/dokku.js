@@ -1,7 +1,8 @@
 const SSH = require('node-ssh');
 const Bluebird = require('bluebird');
+const parseColumns = require('parse-columns');
 
-const config = require('../config/dokku');
+const dokkuConfig = require('../config/dokku');
 
 let connection;
 
@@ -9,7 +10,8 @@ function getApps() {
   return getConn()
     .then(conn => conn.execCommand('apps'))
     .then(processOutput)
-    .then(parseTable);
+    .then(filterComments)
+    .then(getLinesArray);
 }
 
 function createApp(appName) {
@@ -28,7 +30,8 @@ function getConfig(appName) {
   return getConn()
     .then(conn => conn.execCommand(`config ${appName}`))
     .then(processOutput)
-    .then(parseTable)
+    .then(filterComments)
+    .then(getLinesArray)
     .then(parseConfig);
 }
 
@@ -38,9 +41,22 @@ function getUrl(appName) {
     .then(processOutput);
 }
 
-function parseTable(table) {
-  return table.split('\n')
-    .filter(res => res.length && res.indexOf('===') !== 0);
+function getPs(appName) {
+  return getConn()
+    .then(conn => conn.execCommand(`ps ${appName}`))
+    .then(processOutput)
+    .then(filterComments)
+    .then(parseColumns);
+}
+
+function filterComments(output) {
+  return getLinesArray(output)
+    .filter(res => res.length && res.indexOf('===') !== 0 && res.indexOf('---') !== 0)
+    .join('\n');
+}
+
+function getLinesArray(output) {
+  return output.split('\n');
 }
 
 function parseConfig(config) {
@@ -61,7 +77,7 @@ function processOutput({ stdout, stderr, code, signal }) {
 function getConn() {
   if (!connection) {
     console.log('Creating a new ssh connection...');
-    connection = new SSH().connect(config);
+    connection = new SSH().connect(dokkuConfig);
   }
   return connection;
 }
@@ -72,4 +88,5 @@ module.exports = {
   deleteApp,
   getUrl,
   getConfig,
+  getPs,
 };

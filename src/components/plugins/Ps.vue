@@ -1,18 +1,22 @@
 <template>
-  <div class="config">
-    <h4>config:</h4>
+  <div class="ps">
+    <h4>ps:</h4>
     <pulse-loader class="spinner" :color="'#373a3c'" v-if="isLoading"></pulse-loader>
     <div class="data" v-if="!isLoading">
-      <div v-if="config">
+      <div v-if="ps">
         <table class="table table-sm">
-          <tr v-for="(key, value) in config">
-            <th>{{key}}</th>
-            <td>{{value}}</td>
-          </tr>
+          <thead>
+              <th v-for="(key, value) in ps[0]">{{key}}</th>
+          </thead>
+          <tbody>
+            <tr v-for="row in ps">
+              <td v-for="(key, value) in row">{{value}}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
-      <div v-if="!config">
-        <i>no config found for app {{name}}</i>
+      <div v-if="!ps">
+        <i>no ps found for app {{name}}</i>
       </div>
     </div>
   </div>
@@ -25,7 +29,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 export default {
   data() {
     return {
-      config: '',
+      ps: '',
       isLoading: true,
     };
   },
@@ -37,9 +41,9 @@ export default {
       this.isLoading = true;
       this.$data = this.$options.data();
 
-      axios.get(`/api/apps/${this.name}/config`)
+      axios.get(`/api/apps/${this.name}/ps`)
         .then(({ data }) => {
-          this.config = data;
+          this.ps = data;
           this.isLoading = false;
         })
         .catch(() => {

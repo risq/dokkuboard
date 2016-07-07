@@ -6,6 +6,8 @@
     <hr>
     <config :name="name"></config>
     <hr>
+    <ps :name="name"></ps>
+    <hr>
     <button class="btn btn-default" v-on:click="deleteApp">Delete</button>
   </div>
 </template>
@@ -14,6 +16,7 @@
 import axios from 'axios';
 import Urls from './plugins/Urls';
 import Config from './plugins/Config';
+import Ps from './plugins/Ps';
 
 export default {
   data() {
@@ -49,6 +52,7 @@ export default {
   components: {
     Urls,
     Config,
+    Ps,
   },
 };
 </script>
