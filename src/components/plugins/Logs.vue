@@ -64,7 +64,6 @@ export default {
     padding: 12px
     max-height: 400px
     border-radius: 4px
-    background-color: #373a3c
-    overflow: scroll
+    background-color: #1b1b1b
     color: #fff
 </style>

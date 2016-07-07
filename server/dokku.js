@@ -2,8 +2,7 @@ const SSH = require('node-ssh');
 const Bluebird = require('bluebird');
 const parseColumns = require('parse-columns');
 
-const dokkuConfig = require('../config/dokku');
-
+const dokkuConfig = Object.assign({}, require('../config/dokku'));
 let connection;
 
 function getApps() {

@@ -2,7 +2,6 @@ const express = require('express');
 const dokku = require('./dokku');
 const api = express.Router();
 
-
 api.get('/apps', (req, res) => {
   dokku.getApps()
     .then(data => res.json(data))

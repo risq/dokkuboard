@@ -68,3 +68,13 @@ export default {
     margin: 32px 0
     text-align: center
 </style>
+
+<style lang="sass">
+  .terminal
+    font-family: monospace
+    font-size: .8rem
+    padding: 12px
+    border-radius: 4px
+    background-color: #1b1b1b
+    overflow: auto
+</style>
