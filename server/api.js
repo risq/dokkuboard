@@ -38,4 +38,10 @@ api.get('/apps/:name/ps', (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
+api.get('/apps/:name/logs', (req, res) => {
+  dokku.getLogs(req.params.name)
+    .then(data => res.json(data))
+    .catch(err => res.status(500).json(err));
+});
+
 module.exports = api;

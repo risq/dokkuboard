@@ -1,31 +1,24 @@
 <template>
-  <div class="config">
-    <h4>config:</h4>
+  <div class="logs">
+    <h4>logs:</h4>
     <pulse-loader class="spinner" :color="'#373a3c'" v-if="isLoading"></pulse-loader>
-    <div class="data" v-if="!isLoading">
-      <div v-if="config">
-        <table class="table table-sm">
-          <tr v-for="(key, value) in config">
-            <th>{{key}}</th>
-            <td>{{value}}</td>
-          </tr>
-        </table>
-      </div>
-      <div v-if="!config">
-        <i>no config found for app {{name}}</i>
-      </div>
+    <div class="data logs-container" v-if="!isLoading && logs">
+      <div v-if="logs">{{{logs}}}</div>
     </div>
+    <i v-if="!isLoading && !logs">no logs found for app {{name}}</i>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import ansiUp from 'ansi_up';
+
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
 export default {
   data() {
     return {
-      config: '',
+      logs: '',
       isLoading: true,
     };
   },
@@ -37,9 +30,9 @@ export default {
       this.isLoading = true;
       this.$data = this.$options.data();
 
-      axios.get(`/api/apps/${this.name}/config`)
+      axios.get(`/api/apps/${this.name}/logs`)
         .then(({ data }) => {
-          this.config = data;
+          this.logs = ansiUp.ansi_to_html(data.replace(/(?:\r\n|\r|\n)/g, '<br />'));
           this.isLoading = false;
         })
         .catch(() => {
@@ -62,11 +55,17 @@ export default {
 </script>
 
 <style scoped lang="sass">
-  table
-    font-family: monospace
-    font-size: 0.9rem
-
   .spinner
     margin: 32px 0
     text-align: center
+
+  .logs-container
+    font-family: monospace
+    font-size: .8rem
+    padding: 12px
+    max-height: 400px
+    border-radius: 4px
+    background-color: #373a3c
+    overflow: scroll
+    color: #fff
 </style>

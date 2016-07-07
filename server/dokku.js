@@ -49,6 +49,12 @@ function getPs(appName) {
     .then(parseColumns);
 }
 
+function getLogs(appName) {
+  return getConn()
+    .then(conn => conn.execCommand(`logs ${appName}`))
+    .then(processOutput);
+}
+
 function filterComments(output) {
   return getLinesArray(output)
     .filter(res => res.length && res.indexOf('===') !== 0 && res.indexOf('---') !== 0)
@@ -89,4 +95,5 @@ module.exports = {
   getUrl,
   getConfig,
   getPs,
+  getLogs,
 };

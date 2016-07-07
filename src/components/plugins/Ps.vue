@@ -67,7 +67,6 @@ export default {
 
 <style scoped lang="sass">
   table
-    margin-top: 18px
     font-family: monospace
     font-size: 0.9rem
 
