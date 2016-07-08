@@ -48,9 +48,6 @@ export default {
 </script>
 
 <style scoped lang="sass">
-table
-  font-family: monospace
-
 .app-details
   &__title
     margin-bottom: 0

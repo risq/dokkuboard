@@ -1,12 +1,11 @@
 <template>
-  <div class="menu navbar navbar-dark bg-inverse">
+  <div class="menu navbar">
     <pulse-loader class="menu__spinner" :color="'#fff'" v-if="isLoading"></pulse-loader>
     <ul v-if="!isLoading" class="nav navbar-nav">
       <li class="menu__item">
         <a class="nav-link" v-link="{ path: '/' }"=>all apps</a>
       </li>
       <li class="menu__item">
-        <span class="nav-link">app details:</span>
         <ul>
           <li class="menu__item" v-for="name in apps">
             <a class="nav-link" v-link="{ path: `/apps/${name}` }">> {{name}}</a>
@@ -55,11 +54,22 @@ export default {
 </script>
 
 <style scoped lang="sass">
+@import "../common.sass"
+
 .menu
   position: fixed
   border-radius: 0
   height: 100%
-  border-right: 3px solid #eee
+  border-right: 6px solid $color-main-light
+  width: $menu-width
+  background-color: $color-main
+  color: #888
+
+  a
+    color: $color-main-darker
+
+    &:hover
+      color: #000
 
   &__title
     font-size: 2rem

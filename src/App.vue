@@ -22,21 +22,21 @@ export default {
 <style lang="sass">
 @import "../node_modules/bootstrap/scss/bootstrap"
 @import "../node_modules/xterm/src/xterm.css"
-$menuWidth: 300px
+@import "common.sass"
 
 body
-  color: #2c3e50
+  color: $color-main-darker
   font-family: 'Source Sans Pro', Helvetica, sans-serif
 
 .view a
-  color: #42b983
+  color: $color-main-dark
   text-decoration: none
 
-.menu
-  width: $menuWidth
+  &:hover
+    // color: 
 
 .menu + .container
-  margin-left: $menuWidth
+  margin-left: $menu-width + $menu-right-margin
 
 .view
   margin: 32px 0 64px
