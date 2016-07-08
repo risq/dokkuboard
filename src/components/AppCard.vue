@@ -20,10 +20,11 @@
 </template>
 
 <script>
-import axios from 'axios';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import Urls from './plugins/Urls';
 import Config from './plugins/Config';
+
+import chan from 'channels/apps';
 
 export default {
   data() {
@@ -39,7 +40,7 @@ export default {
   methods: {
     deleteApp() {
       this.isLoading = true;
-      axios.delete(`/api/apps/${this.name}`)
+      chan.request('destroy', this.name)
         .then(() => {
           this.$dispatch('app:delete');
           this.isLoading = false;

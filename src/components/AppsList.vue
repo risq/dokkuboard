@@ -7,7 +7,7 @@
       <div class="form-inline">
         <!-- <div class="form-group"> -->
           <input type="text" class="form-control" v-model="inputAppName"></input>
-          <button class="btn btn-default" v-on:click="createApp">Create app</button>
+          <button class="btn btn-default" v-on:click="create">Create app</button>
         <!-- </div> -->
       </div>
       <div v-if="error">
@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import axios from 'axios';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import AppCard from './AppCard';
+import chan from 'channels/apps';
 
 export default {
   data() {
@@ -35,29 +35,27 @@ export default {
     };
   },
   ready() {
-    this.loadApps();
+    this.list();
   },
   methods: {
-    createApp() {
+    create() {
       this.isLoading = true;
-      axios.post('/api/apps', {
-        name: this.inputAppName,
-      })
+      chan.request('create', this.inputAppName)
         .then(() => {
-          this.loadApps();
+          this.list();
           this.error = null;
           this.inputAppName = '';
           this.isLoading = false;
         })
-        .catch(({ data }) => {
-          this.error = data.stderr;
+        .catch(res => {
+          this.error = res.data.stderr;
           this.isLoading = false;
         });
     },
-    loadApps() {
-      return axios.get('/api/apps')
-        .then(({ data }) => {
-          this.apps = data;
+    list() {
+      chan.request('list')
+        .then(apps => {
+          this.apps = apps;
           this.isLoading = false;
         })
         .catch(() => {
@@ -67,7 +65,7 @@ export default {
   },
   events: {
     'app:delete'() {
-      this.loadApps();
+      this.list();
     },
   },
   components: {

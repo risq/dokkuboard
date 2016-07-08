@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 import ansiUp from 'ansi_up';
+import chan from 'channels/logs';
 
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
@@ -27,8 +27,8 @@ export default {
   ],
   methods: {
     getData() {
-      axios.get(`/api/apps/${this.name}/logs`)
-        .then(({ data }) => {
+      chan.request('get', this.name)
+        .then(data => {
           this.logs = ansiUp.ansi_to_html(data.replace(/(?:\r\n|\r|\n)/g, '<br />'));
           this.isLoading = false;
         })

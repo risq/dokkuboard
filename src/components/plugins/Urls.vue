@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+import chan from 'channels/urls';
 
 export default {
   data() {
@@ -25,8 +25,8 @@ export default {
   ],
   methods: {
     getData() {
-      axios.get(`/api/apps/${this.name}/urls`)
-        .then(({ data }) => {
+      chan.request('get', this.name)
+        .then(data => {
           this.url = data;
           this.isLoading = false;
         })

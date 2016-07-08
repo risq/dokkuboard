@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+import chan from 'channels/config';
 
 export default {
   data() {
@@ -34,8 +34,8 @@ export default {
   ],
   methods: {
     getData() {
-      axios.get(`/api/apps/${this.name}/config`)
-        .then(({ data }) => {
+      chan.request('get', this.name)
+        .then(data => {
           this.config = data;
           this.isLoading = false;
         })

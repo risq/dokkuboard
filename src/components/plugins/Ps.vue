@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+import chan from 'channels/ps';
 
 export default {
   data() {
@@ -38,8 +38,8 @@ export default {
   ],
   methods: {
     getData() {
-      axios.get(`/api/apps/${this.name}/ps`)
-        .then(({ data }) => {
+      chan.request('get', this.name)
+        .then(data => {
           this.ps = data;
           this.isLoading = false;
         })

@@ -39,6 +39,6 @@ $menuWidth: 300px
   margin-left: $menuWidth
 
 .view
-  margin-top: 32px
+  margin: 32px 0 64px
 
 </style>
