@@ -1,6 +1,6 @@
 <template>
   <div class="urls">
-    <h4>url:</h4>
+    <h4><span class="label label-default">urls</span></h4>
     <pulse-loader class="spinner" :color="'#373a3c'" v-if="isLoading"></pulse-loader>
     <div class="data" v-if="!isLoading">
       <a href="{{url}}" v-if="url">{{url}}</a>

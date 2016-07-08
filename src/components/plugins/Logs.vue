@@ -1,6 +1,6 @@
 <template>
   <div class="logs">
-    <h4>logs:</h4>
+    <h4><span class="label label-default">logs</span></h4>
     <pulse-loader class="spinner" :color="'#373a3c'" v-if="isLoading"></pulse-loader>
     <div class="data logs-container" v-if="!isLoading && logs">
       <div v-if="logs">{{{logs}}}</div>

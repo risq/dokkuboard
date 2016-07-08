@@ -1,6 +1,6 @@
 <template>
   <div class="config">
-    <h4>config:</h4>
+    <h4><span class="label label-default">config</span></h4>
     <pulse-loader class="spinner" :color="'#373a3c'" v-if="isLoading"></pulse-loader>
     <div class="data" v-if="!isLoading">
       <div v-if="config">
@@ -63,7 +63,7 @@ export default {
 <style scoped lang="sass">
   table
     font-size: 0.9rem
-    
+
     td
       font-family: 'Source Code Pro', monospace
 

@@ -1,6 +1,6 @@
 <template>
   <div class="ps">
-    <h4>ps:</h4>
+    <h4><span class="label label-default">ps</span></h4>
     <pulse-loader class="spinner" :color="'#373a3c'" v-if="isLoading"></pulse-loader>
     <div class="data" v-if="!isLoading">
       <div v-if="ps">
