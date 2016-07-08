@@ -59,8 +59,8 @@ export default {
     text-align: center
 
   .logs-container
-    font-family: monospace
-    font-size: .8rem
+    font-family: 'Source Code Pro', monospace
+    font-size: .9rem
     padding: 12px
     max-height: 400px
     border-radius: 4px

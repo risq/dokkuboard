@@ -1,6 +1,6 @@
 <template>
   <menu></menu>
-  <div class="container">
+  <div class="container app">
     <div class="row">
       <div class="col-sm-12">
         <router-view class="view"></router-view>
@@ -24,11 +24,11 @@ export default {
 @import "../node_modules/xterm/src/xterm.css"
 $menuWidth: 300px
 
-#app
+body
   color: #2c3e50
-  font-family: Source Sans Pro, Helvetica, sans-serif
+  font-family: 'Source Sans Pro', Helvetica, sans-serif
 
-#app a
+.view a
   color: #42b983
   text-decoration: none
 

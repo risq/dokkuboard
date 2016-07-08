@@ -2,6 +2,7 @@
   <div class="enter">
     <h4>enter:</h4>
     <button v-if="!entered" class="btn btn-default" v-on:click="createTerm">Enter container</button>
+    <button v-if="entered" class="btn btn-danger" v-on:click="leaveTerm">Leave container</button>
     <div v-el:term class="term"></div>
   </div>
 </template>
@@ -23,13 +24,6 @@ export default {
     'name',
   ],
   methods: {
-    destroyTerm() {
-      if (this.term && this.socket) {
-        this.socket.close();
-        this.term.detach(this.socket);
-        this.term.destroy();
-      }
-    },
     createTerm() {
       const protocol = (location.protocol === 'https:') ? 'wss' : 'ws';
       const port = location.port ? `:${location.port}` : '';
@@ -46,6 +40,17 @@ export default {
       this.socket.onopen = () => {
         this.term.attach(this.socket);
       };
+    },
+    destroyTerm() {
+      if (this.term && this.socket) {
+        this.term.detach(this.socket);
+        this.term.destroy();
+        this.socket.close();
+      }
+    },
+    leaveTerm() {
+      this.entered = false;
+      this.destroyTerm();
     },
   },
   watch: {
@@ -71,8 +76,9 @@ export default {
 
 <style lang="sass">
   .terminal
-    font-family: monospace
-    font-size: .8rem
+    margin-top: 24px
+    font-family: 'Source Code Pro', monospace
+    font-size: .9rem
     padding: 12px
     border-radius: 4px
     background-color: #1b1b1b

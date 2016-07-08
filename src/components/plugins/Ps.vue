@@ -66,8 +66,10 @@ export default {
 
 <style scoped lang="sass">
   table
-    font-family: monospace
     font-size: 0.9rem
+
+    td
+      font-family: 'Source Code Pro', monospace
 
   .spinner
     margin: 32px 0

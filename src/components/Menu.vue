@@ -74,7 +74,7 @@ export default {
 
     ul
       padding-left: 8px
-      font-family: monospace
+      font-family: 'Source Code Pro', monospace
 
       li
         list-style: none
