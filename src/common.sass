@@ -1,6 +1,6 @@
 $color-white: #FDFDFD
 $color-main-lighter: #EFEFEF
-$color-main-light: #BDD4DE
+$color-main-light: #b1ccd8
 $color-main: #3F5765
 $color-main-dark: #2B3A42
 $color-main-darker: #1d2c35
@@ -22,5 +22,16 @@ h2
   background-color: $color-accent
   color: $color-white
 
-hr
-  // border-color:  $color-main-lighter
+.command
+  font-family: 'Source Code Pro', monospace
+  color: $color-main-light
+  font-size: 1rem
+  font-weight: 700
+  margin-left: 12px
+
+  &__prompt
+    font-weight: 500
+    font-size: 1.1rem
+
+  &__symbol
+    font-size: .85rem

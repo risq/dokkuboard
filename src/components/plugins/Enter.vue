@@ -1,6 +1,6 @@
 <template>
   <div class="enter">
-    <h4><span class="label label-default">enter</span></h4>
+    <h4><span class="label label-default">enter</span><span class="command"><span class="command__prompt">dokku</span><span class="command__symbol">></span> enter {{name}}</span></h4>
     <button v-if="!entered" class="btn btn-default" v-on:click="createTerm">Enter container</button>
     <button v-if="entered" class="btn btn-danger" v-on:click="leaveTerm">Leave container</button>
     <div v-el:term class="term"></div>
