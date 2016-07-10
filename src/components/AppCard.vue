@@ -45,8 +45,7 @@ export default {
           this.$dispatch('app:delete');
           this.isLoading = false;
         })
-        .catch(err => {
-          console.log(err);
+        .catch(() => {
           this.isLoading = false;
         });
     },

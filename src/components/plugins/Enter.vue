@@ -1,69 +1,33 @@
 <template>
   <div class="enter">
     <h4><span class="label label-default">enter</span><span class="command"><span class="command__prompt">dokku</span><span class="command__symbol">></span> enter {{name}}</span></h4>
-    <button v-if="!entered" class="btn btn-default" v-on:click="createTerm">Enter container</button>
-    <button v-if="entered" class="btn btn-danger" v-on:click="leaveTerm">Leave container</button>
-    <div v-el:term class="term"></div>
+    <shell
+      :url="`shell?appName=${name}`"
+      :start-message="'Enter container'"
+      :stop-message="'Leave container'"></shell>
   </div>
 </template>
 
 <script>
-import Terminal from 'xterm';
-import 'xterm/addons/attach/attach';
-import 'xterm/addons/fit/fit';
+import Shell from 'components/Shell';
 
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
 export default {
-  data() {
-    return {
-      entered: false,
-    };
-  },
   props: [
     'name',
   ],
   methods: {
-    createTerm() {
-      const protocol = (location.protocol === 'https:') ? 'wss' : 'ws';
-      const port = location.port ? `:${location.port}` : '';
-      const socketURL = `${protocol}://${location.hostname}${port}/shell?appName=${this.name}`;
-      this.destroyTerm();
-      this.entered = true;
-
-      this.term = new Terminal({ cursorBlink: true });
-      this.term.open(this.$els.term);
-      this.term.fit();
-
-      this.socket = new WebSocket(socketURL);
-
-      this.socket.onopen = () => {
-        this.term.attach(this.socket);
-      };
-    },
-    destroyTerm() {
-      if (this.term && this.socket) {
-        this.term.detach(this.socket);
-        this.term.destroy();
-        this.socket.close();
-      }
-    },
-    leaveTerm() {
-      this.entered = false;
-      this.destroyTerm();
-    },
   },
   watch: {
     name() {
-      this.destroyTerm();
-      this.entered = false;
+      // this.destroyTerm();
+      // this.entered = false;
     },
-  },
-  beforeDestroy() {
-    this.destroyTerm();
   },
   components: {
     PulseLoader,
+    Shell,
   },
 };
 </script>
@@ -74,17 +38,4 @@ export default {
   .spinner
     margin: 32px 0
     text-align: center
-</style>
-
-<style lang="sass">
-  @import "../../common.sass"
-
-  .terminal
-    margin-top: 24px
-    font-family: 'Source Code Pro', monospace
-    font-size: .9rem
-    padding: 12px
-    border-radius: 4px
-    background-color: $color-black
-    overflow: auto
 </style>
