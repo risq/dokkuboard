@@ -25,15 +25,16 @@ export default {
 @import "common.sass"
 
 body
-  color: $color-main-darker
+  background-color: $color-white
+  color: $color-main-dark
   font-family: 'Source Sans Pro', Helvetica, sans-serif
 
-.view a
-  color: $color-main-dark
+a
+  color: $color-accent-dark
   text-decoration: none
 
   &:hover
-    // color: 
+    color: $color-main
 
 .menu + .container
   margin-left: $menu-width + $menu-right-margin

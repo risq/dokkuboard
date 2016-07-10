@@ -7,7 +7,7 @@
     </div>
 
     <div class="card-block">
-      <pulse-loader :color="'#373a3c'" v-if="isLoading"></pulse-loader>
+      <pulse-loader :color="'#3F5765'" v-if="isLoading"></pulse-loader>
       <div v-if="!isLoading">
         <urls :name="name"></urls>
         <hr>

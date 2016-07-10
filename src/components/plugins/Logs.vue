@@ -1,7 +1,7 @@
 <template>
   <div class="logs">
     <h4><span class="label label-default">logs</span></h4>
-    <pulse-loader class="spinner" :color="'#373a3c'" v-if="isLoading"></pulse-loader>
+    <pulse-loader class="spinner" :color="'#3F5765'" v-if="isLoading"></pulse-loader>
     <div class="data logs-container" v-if="!isLoading && logs">
       <div v-if="logs">{{{logs}}}</div>
     </div>
@@ -45,7 +45,9 @@ export default {
     },
   },
   ready() {
-    this.getData();
+    if (this.name) {
+      this.getData();
+    }
   },
   components: {
     PulseLoader,
@@ -54,6 +56,8 @@ export default {
 </script>
 
 <style scoped lang="sass">
+  @import "../../common.sass"
+
   .spinner
     margin: 32px 0
     text-align: center
@@ -64,6 +68,6 @@ export default {
     padding: 12px
     max-height: 400px
     border-radius: 4px
-    background-color: #1b1b1b
-    color: #fff
+    background-color: $color-black
+    color: $color-white
 </style>

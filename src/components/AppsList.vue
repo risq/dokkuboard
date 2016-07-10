@@ -1,8 +1,8 @@
 <template>
-  <div class="dokku-apps-list">
-    <h2>All apps</h2>
+  <div class="apps-list">
+    <h2>all apps</h2>
     <hr>
-    <pulse-loader :color="'#373a3c'" v-if="isLoading"></pulse-loader>
+    <pulse-loader :color="'#3F5765'" v-if="isLoading"></pulse-loader>
     <div v-if="!isLoading">
       <div class="form-inline">
         <!-- <div class="form-group"> -->
@@ -14,7 +14,7 @@
         <b>error:</b> <i>{{error}}</i>
       </div>
     </div>
-    <div class="dokku-apps-list__container">
+    <div class="apps-container">
         <app-card v-for="app in apps" :name="app"></app-card>
     </div>
   </div>
@@ -76,8 +76,10 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.dokku-apps-list
+  @import "../common.sass"
 
-  &__container
+  .apps-list
+
+  .apps-container
     margin-top: 16px
 </style>

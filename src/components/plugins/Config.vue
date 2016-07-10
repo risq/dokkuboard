@@ -1,7 +1,7 @@
 <template>
   <div class="config">
     <h4><span class="label label-default">config</span></h4>
-    <pulse-loader class="spinner" :color="'#373a3c'" v-if="isLoading"></pulse-loader>
+    <pulse-loader class="spinner" :color="'#3F5765'" v-if="isLoading"></pulse-loader>
     <div class="data" v-if="!isLoading">
       <div v-if="config">
         <table class="table table-sm">
@@ -52,7 +52,9 @@ export default {
     },
   },
   ready() {
-    this.getData();
+    if (this.name) {
+      this.getData();
+    }
   },
   components: {
     PulseLoader,
@@ -61,6 +63,8 @@ export default {
 </script>
 
 <style scoped lang="sass">
+  @import "../../common.sass"
+
   table
     font-size: 0.9rem
 

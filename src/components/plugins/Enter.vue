@@ -69,18 +69,22 @@ export default {
 </script>
 
 <style scoped lang="sass">
+  @import "../../common.sass"
+
   .spinner
     margin: 32px 0
     text-align: center
 </style>
 
 <style lang="sass">
+  @import "../../common.sass"
+
   .terminal
     margin-top: 24px
     font-family: 'Source Code Pro', monospace
     font-size: .9rem
     padding: 12px
     border-radius: 4px
-    background-color: #1b1b1b
+    background-color: $color-black
     overflow: auto
 </style>

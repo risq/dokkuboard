@@ -48,7 +48,5 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.app-details
-  &__title
-    margin-bottom: 0
+
 </style>

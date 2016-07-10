@@ -1,16 +1,27 @@
 <template>
-  <div class="menu navbar">
-    <pulse-loader class="menu__spinner" :color="'#fff'" v-if="isLoading"></pulse-loader>
+  <div class="menu">
+    <div class="logo">
+      <h1 class="title">
+        dokku<span class="title-symbol">></span><span class="title-bold">board</span>
+      </h1>
+    </div>
+    <pulse-loader class="spinner" :color="'#96edd6'" v-if="isLoading"></pulse-loader>
     <ul v-if="!isLoading" class="nav navbar-nav">
-      <li class="menu__item">
-        <a class="nav-link" v-link="{ path: '/' }"=>all apps</a>
+      <li class="item">
+        <a class="" v-link="{ path: '/home' }"=>all apps</a>
       </li>
-      <li class="menu__item">
+      <li class="item">
         <ul>
-          <li class="menu__item" v-for="name in apps">
-            <a class="nav-link" v-link="{ path: `/apps/${name}` }">> {{name}}</a>
+          <li class="item" v-for="name in apps">
+            <a class="" v-link="{ path: `/apps/${name}` }">> {{name}}</a>
           </li>
         </ul>
+      </li>
+      <li class="item">
+        <a class="" v-link="{ path: '/config' }"=>config</a>
+      </li>
+      <li class="item">
+        <a class="" v-link="{ path: '/events' }"=>events</a>
       </li>
     </ul>
   </div>
@@ -53,47 +64,82 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 @import "../common.sass"
 
 .menu
   position: fixed
   border-radius: 0
   height: 100%
-  border-right: 6px solid $color-main-light
+  border-right: 6px solid $color-accent-light
   width: $menu-width
   background-color: $color-main
-  color: #888
+  color: $color-white
 
   a
-    color: $color-main-darker
+    color: $color-white
+    text-decoration: none
 
     &:hover
-      color: #000
+      color: $color-accent
 
-  &__title
-    font-size: 2rem
-    border-bottom: 1px solid #888
+    &.v-link-active
+      color: $color-accent
 
-  &__item
-    font-size: 1.2rem
-    float: none
-    min-height: 32px
-    line-height: 32px
-    font-weight: bold
+.item
+  font-size: 1.2rem
+  float: none
+  min-height: 32px
+  line-height: 32px
+  font-weight: bold
+  padding: 0 24px
+  margin: 6px 0
 
-    ul
-      padding-left: 8px
+  ul
+    padding-left: 8px
+    font-family: 'Source Code Pro', monospace
+
+    .item
+      list-style: none
+      min-height: 18px
+      line-height: 18px
+      font-size: .9rem
+      padding: 6px 6px
+      margin: 0
+
+      &:first-of-type
+        margin-top: 6px
+
+.logo
+  padding: 8px 24px
+  margin: 0 0 16px
+  background-color: darken($color-main, 2%)
+  text-align: center
+
+  .title
+    font-family: 'Source Sans Pro', Helvetica, sans-serif
+    font-size: 1.5em
+    padding: 16px 0
+    // border-bottom: 1px solid $color-main-light
+    color: $color-accent-light
+    margin: 0
+
+    &-symbol
       font-family: 'Source Code Pro', monospace
+      display: inline-block
+      color: $color-main-light
+      font-size: 1rem
+      margin: 0 -1px
+      font-weight: 700
 
-      li
-        list-style: none
-        min-height: 18px
-        line-height: 18px
-        font-size: .9rem
+    &-bold
+      font-family: 'Source Code Pro', monospace
+      font-weight: bold
+      color: $color-white
+      font-size: 1.45rem
 
-  &__spinner
-    text-align: center
-    margin: 128px 0
+.spinner
+  text-align: center
+  margin: 128px 0
 
 </style>
