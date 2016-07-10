@@ -7,7 +7,7 @@ const channel = transceiver.channel('ps')
   });
 
 function get(name) {
-  return axios.get(`/api/apps/${name}/ps`)
+  return axios.get(`/api/ps/${name}`)
     .then(({ data }) => data);
 }
 

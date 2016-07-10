@@ -7,7 +7,7 @@ const channel = transceiver.channel('config')
   });
 
 function get(name) {
-  return axios.get(`/api/apps/${name}/config`)
+  return axios.get(`/api/config/${name}`)
     .then(({ data }) => data);
 }
 
