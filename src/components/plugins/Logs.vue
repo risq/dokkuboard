@@ -6,18 +6,7 @@
       <div class="data logs-container" v-if="logs">
         <div>{{{logs}}}</div>
       </div>
-      <div class="error" v-if="error && error.stdout || error.stderr">
-        <h4 class="error__title">Error</h4>
-        <div class="error__content error__content--both" v-if="error.stderr && error.stdout === error.stderr">
-          {{error.stderr}}
-        </div>
-        <div class="error__content error__content--stderr" v-if="error.stderr && error.stdout !== error.stderr">
-          {{error.stderr}}
-        </div>
-        <div class="error__content error__content--stdout" v-if="error.stdout && error.stdout !== error.stderr">
-          {{error.stdout}}
-        </div>
-      </div>
+      <error :error="error"></error>
     </div>
   </div>
 </template>
@@ -25,6 +14,7 @@
 <script>
 import ansiUp from 'ansi_up';
 import chan from 'channels/logs';
+import Error from 'components/Error';
 
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
@@ -68,6 +58,7 @@ export default {
   },
   components: {
     PulseLoader,
+    Error,
   },
 };
 </script>

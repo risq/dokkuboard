@@ -15,18 +15,7 @@
           </tbody>
         </table>
       </div>
-      <div class="error" v-if="error">
-        <h4 class="error__title">Error</h4>
-        <div class="error__content error__content--both" v-if="error.stderr && error.stdout === error.stderr">
-          {{error.stderr}}
-        </div>
-        <div class="error__content error__content--stderr" v-if="error.stderr && error.stdout !== error.stderr">
-          {{error.stderr}}
-        </div>
-        <div class="error__content error__content--stdout" v-if="error.stdout && error.stdout !== error.stderr">
-          {{error.stdout}}
-        </div>
-      </div>
+      <error :error="error"></error>
     </div>
   </div>
 </template>
@@ -34,6 +23,7 @@
 <script>
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import chan from 'channels/ps';
+import Error from 'components/Error';
 
 export default {
   data() {
@@ -75,6 +65,7 @@ export default {
   },
   components: {
     PulseLoader,
+    Error,
   },
 };
 </script>
