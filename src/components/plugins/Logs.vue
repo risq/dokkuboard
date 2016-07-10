@@ -2,10 +2,23 @@
   <div class="logs">
     <h4><span class="label label-default">logs</span><span class="command"><span class="command__prompt">dokku</span><span class="command__symbol">></span> logs {{name}}</span></h4>
     <pulse-loader class="spinner" :color="'#3F5765'" v-if="isLoading"></pulse-loader>
-    <div class="data logs-container" v-if="!isLoading && logs">
-      <div v-if="logs">{{{logs}}}</div>
+    <div v-if="!isLoading">
+      <div class="data logs-container" v-if="logs">
+        <div>{{{logs}}}</div>
+      </div>
+      <div class="error" v-if="error && error.stdout || error.stderr">
+        <h4 class="error__title">Error</h4>
+        <div class="error__content error__content--both" v-if="error.stderr && error.stdout === error.stderr">
+          {{error.stderr}}
+        </div>
+        <div class="error__content error__content--stderr" v-if="error.stderr && error.stdout !== error.stderr">
+          {{error.stderr}}
+        </div>
+        <div class="error__content error__content--stdout" v-if="error.stdout && error.stdout !== error.stderr">
+          {{error.stdout}}
+        </div>
+      </div>
     </div>
-    <i v-if="!isLoading && !logs">no logs found for app {{name}}</i>
   </div>
 </template>
 
@@ -19,6 +32,7 @@ export default {
   data() {
     return {
       logs: '',
+      error: null,
       isLoading: true,
     };
   },
@@ -30,9 +44,12 @@ export default {
       chan.request('get', this.name)
         .then(data => {
           this.logs = ansiUp.ansi_to_html(data.replace(/(?:\r\n|\r|\n)/g, '<br />'));
+          this.error = null;
           this.isLoading = false;
         })
-        .catch(() => {
+        .catch(err => {
+          this.logs = null;
+          this.error = err.data;
           this.isLoading = false;
         });
     },

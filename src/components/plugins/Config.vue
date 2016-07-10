@@ -11,8 +11,17 @@
           </tr>
         </table>
       </div>
-      <div v-if="!config">
-        <i>no config found for app {{name}}</i>
+      <div class="error" v-if="error">
+        <h4 class="error__title">Error</h4>
+        <div class="error__content error__content--both" v-if="error.stderr && error.stdout === error.stderr">
+          {{error.stderr}}
+        </div>
+        <div class="error__content error__content--stderr" v-if="error.stderr && error.stdout !== error.stderr">
+          {{error.stderr}}
+        </div>
+        <div class="error__content error__content--stdout" v-if="error.stdout && error.stdout !== error.stderr">
+          {{error.stdout}}
+        </div>
       </div>
     </div>
   </div>
@@ -26,6 +35,7 @@ export default {
   data() {
     return {
       config: '',
+      error: null,
       isLoading: true,
     };
   },
@@ -37,9 +47,12 @@ export default {
       chan.request('get', this.name)
         .then(data => {
           this.config = data;
+          this.error = null;
           this.isLoading = false;
         })
-        .catch(() => {
+        .catch(err => {
+          this.config = null;
+          this.error = err.data;
           this.isLoading = false;
         });
     },

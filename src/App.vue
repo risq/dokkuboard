@@ -22,6 +22,7 @@ export default {
 <style lang="sass">
 @import "../node_modules/bootstrap/scss/bootstrap"
 @import "../node_modules/xterm/src/xterm.css"
+@import "main.sass"
 @import "common.sass"
 
 body

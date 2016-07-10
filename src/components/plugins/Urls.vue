@@ -4,8 +4,19 @@
     <pulse-loader class="spinner" :color="'#3F5765'" v-if="isLoading"></pulse-loader>
     <div class="data" v-if="!isLoading">
       <a href="{{url}}" v-if="url">{{url}}</a>
-      <i v-if="!url">no url found for app {{name}}</i>
-  </div>
+      <div class="error" v-if="error">
+        <h4 class="error__title">Error</h4>
+        <div class="error__content error__content--both" v-if="error.stderr && error.stdout === error.stderr">
+          {{error.stderr}}
+        </div>
+        <div class="error__content error__content--stderr" v-if="error.stderr && error.stdout !== error.stderr">
+          {{error.stderr}}
+        </div>
+        <div class="error__content error__content--stdout" v-if="error.stdout && error.stdout !== error.stderr">
+          {{error.stdout}}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -17,6 +28,7 @@ export default {
   data() {
     return {
       url: '',
+      error: null,
       isLoading: true,
     };
   },
@@ -28,9 +40,12 @@ export default {
       chan.request('get', this.name)
         .then(data => {
           this.url = data;
+          this.error = null;
           this.isLoading = false;
         })
-        .catch(() => {
+        .catch(err => {
+          this.url = null;
+          this.error = err.data;
           this.isLoading = false;
         });
     },
