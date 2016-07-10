@@ -1,4 +1,4 @@
-# dokku-web
+# dokkuboard
 
 > Simple poc for a dokku monitoring webapp.
 

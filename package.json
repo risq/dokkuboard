@@ -1,5 +1,5 @@
 {
-  "name": "dokku-web",
+  "name": "dokkuboard",
   "version": "0.1.0",
   "description": "Simple poc for a dokku monitoring webapp.",
   "author": "Valentin Ledrapier <valentin.ledrapier@gmail.com>",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/risq/dokku-web.git"
+    "url": "git+https://github.com/risq/dokkuboard.git"
   },
   "dependencies": {
     "ansi_up": "^1.3.0",
