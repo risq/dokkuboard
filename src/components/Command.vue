@@ -1,6 +1,6 @@
 <template>
   <div class="command" v-bind:class="{ 'command--inline': inline }">
-    <span class="command__prompt">dokku</span><span class="command__symbol">></span> {{command}}
+    <span class="command__prompt">dokku</span><i class="fa fa-chevron-right command__symbol"></i> {{command}}
   </div>
 </template>
 
@@ -34,5 +34,7 @@ export default {
       font-weight: 500
 
     &__symbol
-      font-size: .7rem
+      font-weight: 500
+      font-size: .5rem
+      color: lighten($color-main-light, 10%)
 </style>

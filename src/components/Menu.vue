@@ -2,7 +2,7 @@
   <div class="menu">
     <div class="logo">
       <h1 class="title">
-        dokku<span class="title-symbol">></span><span class="title-bold">board</span>
+        dokku<i class="fa fa-chevron-right title-symbol"></i><span class="title-bold">board</span>
       </h1>
     </div>
     <pulse-loader class="spinner" :color="'#96edd6'" v-if="isLoading"></pulse-loader>
@@ -13,7 +13,7 @@
       <li class="item">
         <ul>
           <li class="item" v-for="name in apps">
-            <a v-link="{ path: `/apps/${name}` }">> {{name}}</a>
+            <a v-link="{ path: `/apps/${name}` }"><i class="fa fa-chevron-right fa-sm" aria-hidden="true"></i> {{name}}</a>
           </li>
         </ul>
       </li>
@@ -84,7 +84,7 @@ export default {
       color: $color-accent
 
     &.v-link-active
-      color: $color-accent
+      color: $color-accent-light
 
 .item
   font-size: 1.2rem
@@ -125,12 +125,10 @@ export default {
     margin: 0
 
     &-symbol
-      font-family: 'Source Code Pro', monospace
       display: inline-block
       color: $color-main-light
-      font-size: 1rem
+      font-size: .8rem
       margin: 0 -1px
-      font-weight: 700
 
     &-bold
       font-family: 'Source Code Pro', monospace

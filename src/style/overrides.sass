@@ -1,0 +1,46 @@
+@import "../common.sass"
+
+.btn
+  transition: all 0.1s ease-in-out
+  text-transform: uppercase
+  font-size: .9rem
+
+  &-primary
+    background-color: $color-accent
+    border-color: $color-accent
+
+    &:hover,
+    &:active,
+    &:focus
+      background-color: $color-accent-dark
+      border-color: $color-accent-dark
+
+    &-outline
+      color: $color-accent-dark
+      border-color: $color-accent
+
+      &:hover,
+      &:active,
+      &:focus
+        background-color: $color-accent
+        border-color: $color-accent
+
+  &-danger
+    background-color: $color-accent-secondary
+    border-color: $color-accent-secondary
+
+    &:hover,
+    &:active,
+    &:focus
+      background-color: $color-accent-secondary-dark
+      border-color: $color-accent-secondary-dark
+
+    &-outline
+      color: $color-accent-secondary-dark
+      border-color: $color-accent-secondary
+
+      &:hover,
+      &:active,
+      &:focus
+        background-color: $color-accent-secondary
+        border-color: $color-accent-secondary

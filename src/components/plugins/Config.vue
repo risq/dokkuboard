@@ -3,8 +3,8 @@
     <h4><span class="label label-default">config</span></h4>
     <pulse-loader class="spinner" :color="'#3F5765'" v-if="isLoading"></pulse-loader>
     <div class="data" v-if="!isLoading">
+      <command :command="`config ${name}`"></command>
       <div v-if="config">
-        <command :command="`config ${name}`"></command>
         <table class="table table-sm">
           <tr v-for="(key, value) in config">
             <th>{{key}}</th>

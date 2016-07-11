@@ -3,17 +3,21 @@
     <h4><span class="label label-default">logs</span></h4>
     <pulse-loader class="spinner" :color="'#3F5765'" v-if="isLoading"></pulse-loader>
     <div v-if="!isLoading">
+
+      <command :command="`logs ${name}`"></command>
       <div v-if="!error">
-        <command :command="`logs ${name}`"></command>
         <div class="data logs-container" v-if="logs">
           <div>{{{logs}}}</div>
         </div>
+
         <command :command="`logs ${name} -t`"></command>
-        <shell
-          :command="`logs?appName=${name}`"
-          :start-message="'Tail logs'"
-          :stop-message="'Close connection'"></shell>
+          <shell
+            :command="`logs?appName=${name}`"
+            :start-message="'tail logs'"
+            :stop-message="'close connection'"></shell>
+          </div>
       </div>
+
       <error :error="error"></error>
     </div>
   </div>

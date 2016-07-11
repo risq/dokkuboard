@@ -3,8 +3,8 @@
     <h4><span class="label label-default">ps</span></h4>
     <pulse-loader class="spinner" :color="'#3F5765'" v-if="isLoading"></pulse-loader>
     <div class="data" v-if="!isLoading">
+      <command :command="`ps ${name}`"></command>
       <div v-if="ps">
-        <command :command="`ps ${name}`"></command>
         <table class="table table-sm">
           <thead>
               <th v-for="(key, value) in ps[0]">{{key}}</th>

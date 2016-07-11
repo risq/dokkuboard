@@ -4,8 +4,8 @@
     <command :command="`enter ${name}`"></command>
     <shell
       :command="`enter?appName=${name}`"
-      :start-message="'Enter container'"
-      :stop-message="'Leave container'"></shell>
+      :start-message="'enter container'"
+      :stop-message="'close connection'"></shell>
   </div>
 </template>
 

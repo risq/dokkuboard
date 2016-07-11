@@ -1,6 +1,6 @@
 <template>
   <div class="error" v-if="error && (error.stdout || error.stderr)">
-    <h4 class="error__title">Error</h4>
+    <h4 class="error__title"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Error</h4>
     <div class="error__content error__content--both" v-if="error.stderr && error.stdout === error.stderr">
       {{error.stderr}}
     </div>
@@ -30,12 +30,13 @@ export default {
     color: $color-main
 
     &__title
-      font-size: 1rem
+      font-size: .8rem
       text-transform: uppercase
       color: $color-main
       font-weight: 700
-      margin: 1rem 0 .25rem
+      margin: 0 0 .25rem
       padding-left: 0.25rem
+      color: $color-accent-secondary-dark
 
     &__content
       background-color: $color-main-lighter

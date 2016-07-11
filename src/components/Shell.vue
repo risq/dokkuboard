@@ -1,6 +1,10 @@
 <template>
-  <button v-if="!started" class="btn btn-default" v-on:click="createTerm">{{startMessage}}</button>
-  <button v-if="started" class="btn btn-danger" v-on:click="leaveTerm">{{stopMessage}}</button>
+  <button v-if="!started" class="btn btn-primary-outline" v-on:click="createTerm">
+    <i class="fa fa-terminal fa-fw" aria-hidden="true"></i> {{startMessage}}
+  </button>
+  <button v-if="started" class="btn btn-danger-outline" v-on:click="leaveTerm">
+    <i class="fa fa-power-off fa-fw" aria-hidden="true"></i> {{stopMessage}}
+  </button>
   <div v-el:term class="term"></div>
 </template>
 
@@ -68,11 +72,12 @@ export default {
   @import "../common.sass"
 
   .terminal
-    margin-top: 24px
+    margin-top: 12px
     font-family: 'Source Code Pro', monospace
     font-size: .9rem
     padding: 12px
     border-radius: 4px
     background-color: $color-black
     overflow: auto
+    height: 256px
 </style>
