@@ -62,6 +62,8 @@ if (env === 'dev') {
   // enable hot-reload and state-preserving
   // compilation error display
   app.use(hotMiddleware);
+} else if (env === 'production') {
+  app.use(express.static('./dist'));
 }
 
 // serve pure static assets
