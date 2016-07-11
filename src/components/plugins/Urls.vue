@@ -17,7 +17,7 @@ import Error from 'components/Error';
 export default {
   data() {
     return {
-      url: '',
+      url: null,
       error: null,
       isLoading: true,
     };

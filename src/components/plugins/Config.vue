@@ -24,7 +24,7 @@ import Error from 'components/Error';
 export default {
   data() {
     return {
-      config: '',
+      config: null,
       error: null,
       isLoading: true,
     };

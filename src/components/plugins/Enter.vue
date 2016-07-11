@@ -2,7 +2,7 @@
   <div class="enter">
     <h4><span class="label label-default">enter</span><span class="command"><span class="command__prompt">dokku</span><span class="command__symbol">></span> enter {{name}}</span></h4>
     <shell
-      :url="`shell?appName=${name}`"
+      :command="`enter?appName=${name}`"
       :start-message="'Enter container'"
       :stop-message="'Leave container'"></shell>
   </div>

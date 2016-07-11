@@ -3,14 +3,14 @@ const pty = require('pty.js');
 
 const dokkuConfig = require('../config/dokku');
 
-function getCommand(appName) {
+function getCommand(dokkuCommand) {
   const args = [
     '-t',
     `-i ${dokkuConfig.privateKey}`,
     `${dokkuConfig.username}@${dokkuConfig.host}`,
     `-p ${dokkuConfig.port}`,
     '--',
-    `enter ${appName}`,
+    dokkuCommand,
   ];
 
   return `ssh ${args.join(' ')} #\n`;
@@ -27,12 +27,12 @@ function delayKillProcess(pid, delay = 10000) {
   }, delay);
 }
 
-function initShell(appName, ws) {
+function initShell(dokkuCommand, ws) {
   let connState = 0;
 
-  console.log(`Creating new shell for app ${appName}`);
+  console.log(`Creating new shell with command "${dokkuCommand}"`);
   const term = pty.spawn('bash', [], {
-    name: `${appName}-container`,
+    name: dokkuCommand,
     cols: 80,
     rows: 24,
     cwd: process.env.PWD,
@@ -50,22 +50,29 @@ function initShell(appName, ws) {
   });
   ws.on('message', message => term.write(message));
   ws.on('close', () => {
-    console.log(`Closing existing shell for app ${appName}`);
+    console.log(`Closing existing shell for command "${dokkuCommand}"`);
     term.write('exit\n');
     term.end();
     delayKillProcess(term.pid);
   });
 
-  term.write(getCommand(appName));
+  term.write(getCommand(dokkuCommand));
 }
 
 module.exports = {
   init(app) {
     expressWs(app);
 
-    app.ws('/shell', (ws, req, next) => {
+    app.ws('/shell/enter', (ws, req, next) => {
       if (req.query.appName) {
-        initShell(req.query.appName, ws);
+        initShell(`enter ${req.query.appName}`, ws);
+      }
+      next();
+    });
+
+    app.ws('/shell/logs', (ws, req, next) => {
+      if (req.query.appName) {
+        initShell(`logs ${req.query.appName} -t`, ws);
       }
       next();
     });

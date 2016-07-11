@@ -16,16 +16,16 @@ export default {
     };
   },
   props: [
-    'url',
+    'command',
     'startMessage',
     'stopMessage',
   ],
   methods: {
     createTerm() {
-      if (this.url) {
+      if (this.command) {
         const protocol = (location.protocol === 'https:') ? 'wss' : 'ws';
         const port = location.port ? `:${location.port}` : '';
-        const socketURL = `${protocol}://${location.hostname}${port}/${this.url}`;
+        const socketURL = `${protocol}://${location.hostname}${port}/shell/${this.command}`;
         this.destroyTerm();
         this.started = true;
 
@@ -53,7 +53,7 @@ export default {
     },
   },
   watch: {
-    url() {
+    command() {
       this.destroyTerm();
       this.started = false;
     },

@@ -28,7 +28,7 @@ import Error from 'components/Error';
 export default {
   data() {
     return {
-      ps: '',
+      ps: null,
       error: null,
       isLoading: true,
     };
