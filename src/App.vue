@@ -31,11 +31,11 @@ body
   font-family: 'Source Sans Pro', Helvetica, sans-serif
 
 a
-  color: $color-accent-dark
+  color: $color-accent
   text-decoration: none
 
   &:hover
-    color: $color-main
+    color: $color-accent-dark
 
 .menu + .container
   margin-left: $menu-width + $menu-right-margin

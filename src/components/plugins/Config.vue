@@ -1,9 +1,10 @@
 <template>
   <div class="config">
-    <h4><span class="label label-default">config</span><span class="command"><span class="command__prompt">dokku</span><span class="command__symbol">></span> config {{name}}</span></h4>
+    <h4><span class="label label-default">config</span></h4>
     <pulse-loader class="spinner" :color="'#3F5765'" v-if="isLoading"></pulse-loader>
     <div class="data" v-if="!isLoading">
       <div v-if="config">
+        <command :command="`config ${name}`"></command>
         <table class="table table-sm">
           <tr v-for="(key, value) in config">
             <th>{{key}}</th>
@@ -19,6 +20,8 @@
 <script>
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import chan from 'channels/config';
+
+import Command from 'components/Command';
 import Error from 'components/Error';
 
 export default {
@@ -62,6 +65,7 @@ export default {
   components: {
     PulseLoader,
     Error,
+    Command,
   },
 };
 </script>

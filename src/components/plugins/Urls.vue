@@ -1,8 +1,9 @@
 <template>
   <div class="urls">
-    <h4><span class="label label-default">urls</span><span class="command"><span class="command__prompt">dokku</span><span class="command__symbol">></span> urls {{name}}</span></h4>
+    <h4><span class="label label-default">urls</span></h4>
     <pulse-loader class="spinner" :color="'#3F5765'" v-if="isLoading"></pulse-loader>
     <div class="data" v-if="!isLoading">
+      <command :command="`urls ${name}`"></command>
       <a href="{{url}}" v-if="url">{{url}}</a>
       <error :error="error"></error>
     </div>
@@ -12,6 +13,8 @@
 <script>
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import chan from 'channels/urls';
+
+import Command from 'components/Command';
 import Error from 'components/Error';
 
 export default {
@@ -55,6 +58,7 @@ export default {
   components: {
     PulseLoader,
     Error,
+    Command,
   },
 };
 </script>

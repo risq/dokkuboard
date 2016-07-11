@@ -1,12 +1,14 @@
 <template>
   <div class="logs">
-    <h4><span class="label label-default">logs</span><span class="command"><span class="command__prompt">dokku</span><span class="command__symbol">></span> logs {{name}}</span></h4>
+    <h4><span class="label label-default">logs</span></h4>
     <pulse-loader class="spinner" :color="'#3F5765'" v-if="isLoading"></pulse-loader>
     <div v-if="!isLoading">
       <div v-if="!error">
+        <command :command="`logs ${name}`"></command>
         <div class="data logs-container" v-if="logs">
           <div>{{{logs}}}</div>
         </div>
+        <command :command="`logs ${name} -t`"></command>
         <shell
           :command="`logs?appName=${name}`"
           :start-message="'Tail logs'"
@@ -21,8 +23,9 @@
 import ansiUp from 'ansi_up';
 import chan from 'channels/logs';
 
-import Error from 'components/Error';
+import Command from 'components/Command';
 import Shell from 'components/Shell';
+import Error from 'components/Error';
 
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
@@ -68,6 +71,7 @@ export default {
   },
   components: {
     PulseLoader,
+    Command,
     Shell,
     Error,
   },

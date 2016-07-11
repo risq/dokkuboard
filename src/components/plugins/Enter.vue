@@ -1,6 +1,7 @@
 <template>
   <div class="enter">
-    <h4><span class="label label-default">enter</span><span class="command"><span class="command__prompt">dokku</span><span class="command__symbol">></span> enter {{name}}</span></h4>
+    <h4><span class="label label-default">enter</span></h4>
+    <command :command="`enter ${name}`"></command>
     <shell
       :command="`enter?appName=${name}`"
       :start-message="'Enter container'"
@@ -9,6 +10,7 @@
 </template>
 
 <script>
+import Command from 'components/Command';
 import Shell from 'components/Shell';
 
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
@@ -28,6 +30,7 @@ export default {
   components: {
     PulseLoader,
     Shell,
+    Command,
   },
 };
 </script>
