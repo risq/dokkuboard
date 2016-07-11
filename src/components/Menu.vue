@@ -8,20 +8,20 @@
     <pulse-loader class="spinner" :color="'#96edd6'" v-if="isLoading"></pulse-loader>
     <ul v-if="!isLoading" class="nav navbar-nav">
       <li class="item">
-        <a class="" v-link="{ path: '/home' }"=>all apps</a>
+        <a v-link="{ path: '/home' }">all apps</a>
       </li>
       <li class="item">
         <ul>
           <li class="item" v-for="name in apps">
-            <a class="" v-link="{ path: `/apps/${name}` }">> {{name}}</a>
+            <a v-link="{ path: `/apps/${name}` }">> {{name}}</a>
           </li>
         </ul>
       </li>
       <li class="item">
-        <a class="" v-link="{ path: '/config' }"=>config</a>
+        <a v-link="{ path: '/config' }">config</a>
       </li>
       <li class="item">
-        <a class="" v-link="{ path: '/events' }"=>events</a>
+        <a v-link="{ path: '/events' }">events</a>
       </li>
     </ul>
   </div>
